@@ -36,7 +36,9 @@ fun RecipeNavHost(
         }
 
         composable(route = DetailsDestination.route) {
-            RecipeDetailsScreen(recipeDetailsViewModel = recipeDetailsViewModel)
+            RecipeDetailsScreen(
+                recipeDetailsViewModel = recipeDetailsViewModel,
+                navigateUp = { navController.popBackStack() })
         }
     }
 

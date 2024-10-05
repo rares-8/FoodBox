@@ -44,9 +44,7 @@ fun HomeScreen(
             TopRecipeAppBar(
                 title = stringResource(id = R.string.app_name),
                 canNavigateBack = false,
-                canEdit = false,
-                navigateUp = { },
-                editRecipe = { })
+                navigateUp = { })
         },
         modifier = modifier
     ) { innerPadding ->
@@ -57,7 +55,7 @@ fun HomeScreen(
             navigateToRecipeDetails = navigateToRecipeDetails,
             recipe = Recipe(
                 name = "Steak",
-                ingredients = "meat, salt",
+                ingredients = "Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.",
                 instructions = "cook it"
             ),
             modifier = Modifier.padding(innerPadding)

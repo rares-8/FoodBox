@@ -20,9 +20,7 @@ import com.example.foodbox.data.Recipe
 fun TopRecipeAppBar(
     title: String,
     canNavigateBack: Boolean,
-    canEdit: Boolean,
     navigateUp: () -> Unit,
-    editRecipe: () -> Unit,
     modifier: Modifier = Modifier,
     scrollBehaviour: TopAppBarScrollBehavior? = null,
 ) {
@@ -30,21 +28,12 @@ fun TopRecipeAppBar(
         title = { Text(text = title, style = MaterialTheme.typography.headlineMedium) },
         modifier = modifier,
         scrollBehavior = scrollBehaviour,
-        actions = {
+        navigationIcon = {
             if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "go back"
-                    )
-                }
-            }
-
-            if (canEdit) {
-                IconButton(onClick = editRecipe) {
-                    Icon(
-                        imageVector = Icons.Filled.Edit,
-                        contentDescription = "edit"
                     )
                 }
             }
