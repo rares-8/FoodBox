@@ -1,16 +1,26 @@
 package com.example.foodbox.ui.home
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -37,14 +47,32 @@ object HomeDestination : NavigationDestination {
 @Composable
 fun HomeScreen(
     navigateToRecipeDetails: (Recipe) -> Unit,
+    navigateToRecipeEntry: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val scrollState = rememberScrollState()
+
     Scaffold(
         topBar = {
             TopRecipeAppBar(
-                title = stringResource(id = R.string.app_name),
+                title = stringResource(id = HomeDestination.titleRes),
                 canNavigateBack = false,
                 navigateUp = { })
+        },
+        floatingActionButton = {
+            AnimatedVisibility(visible = scrollState.value == 0) {
+                FloatingActionButton(
+                    onClick = navigateToRecipeEntry,
+                    shape = MaterialTheme.shapes.medium,
+                    modifier = Modifier.padding(
+                        end = WindowInsets.safeDrawing.asPaddingValues().calculateEndPadding(
+                            LocalLayoutDirection.current
+                        )
+                    )
+                ) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "edit recipe")
+                }
+            }
         },
         modifier = modifier
     ) { innerPadding ->
@@ -56,7 +84,8 @@ fun HomeScreen(
             recipe = Recipe(
                 name = "Steak",
                 ingredients = "Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.",
-                instructions = "cook it"
+                instructions = "cook it",
+                nutriValue = ""
             ),
             modifier = Modifier.padding(innerPadding)
         )

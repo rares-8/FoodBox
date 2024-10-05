@@ -281,6 +281,13 @@ string navigation_menu
 string not_selected
 string range_end
 string range_start
+string recipe_entry
+string recipe_ingredients_entry
+string recipe_instructions_entry
+string recipe_name_entry
+string recipe_nutritional_entry
+string required_fields
+string save_action
 string selected
 string state_empty
 string state_off

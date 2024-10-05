@@ -70,7 +70,7 @@ fun RecipeDetailsScreen(
     Scaffold(
         topBar = {
             TopRecipeAppBar(
-                title = stringResource(id = R.string.details_title),
+                title = stringResource(id = DetailsDestination.titleRes),
                 canNavigateBack = true,
                 navigateUp = navigateUp
             )
@@ -121,6 +121,7 @@ fun RecipeDetailsBody(
      */
     var ingredientsExpanded by remember { mutableStateOf(false) }
     var instructionsExpanded by remember { mutableStateOf(false) }
+    var nutritionExpanded by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
@@ -147,6 +148,14 @@ fun RecipeDetailsBody(
             sectionTitle = "Instructions",
             isVisible = instructionsExpanded,
             onButtonClicked = { instructionsExpanded = !instructionsExpanded })
+
+        if (recipe.nutriValue.isNotBlank()) {
+            RecipeSection(
+                recipeText = recipe.nutriValue,
+                sectionTitle = "Nutritional value",
+                isVisible = nutritionExpanded,
+                onButtonClicked = { nutritionExpanded = !nutritionExpanded })
+        }
     }
 }
 

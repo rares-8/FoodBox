@@ -27,7 +27,8 @@ class RecipeDetailsViewModel(
                     id = id,
                     name = name,
                     instructions = instructions,
-                    ingredients = ingredients
+                    ingredients = ingredients,
+                    nutriValue = nutriValue
                 )
             }
         }

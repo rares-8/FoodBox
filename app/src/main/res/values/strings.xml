@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Food Box</string>
     <string name="details_title">Details</string>
+    <string name="recipe_entry">Add recipe</string>
+    <string name="recipe_name_entry">Recipe name*</string>
+    <string name="recipe_ingredients_entry">Ingredients*</string>
+    <string name="recipe_instructions_entry">Instructions*</string>
+    <string name="recipe_nutritional_entry">Nutritional values</string>
+    <string name="required_fields">* required fields\n</string>
+    <string name="save_action">Save recipe</string>
     <array name="com_google_android_gms_fonts_certs">
         <item>@array/com_google_android_gms_fonts_certs_dev</item>
         <item>@array/com_google_android_gms_fonts_certs_prod</item>

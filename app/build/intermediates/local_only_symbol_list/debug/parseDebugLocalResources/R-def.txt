@@ -20,6 +20,13 @@ mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
 string details_title
+string recipe_entry
+string recipe_ingredients_entry
+string recipe_instructions_entry
+string recipe_name_entry
+string recipe_nutritional_entry
+string required_fields
+string save_action
 style Theme.FoodBox
 xml backup_rules
 xml data_extraction_rules

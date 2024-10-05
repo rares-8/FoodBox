@@ -12,6 +12,9 @@ import com.example.foodbox.ui.home.HomeScreen
 import com.example.foodbox.ui.recipe.DetailsDestination
 import com.example.foodbox.ui.recipe.RecipeDetailsScreen
 import com.example.foodbox.ui.recipe.RecipeDetailsViewModel
+import com.example.foodbox.ui.recipe.RecipeEntryDestination
+import com.example.foodbox.ui.recipe.RecipeEntryScreen
+import com.example.foodbox.ui.recipe.RecipeEntryViewModel
 
 @Composable
 fun RecipeNavHost(
@@ -21,6 +24,9 @@ fun RecipeNavHost(
     val recipeDetailsViewModel: RecipeDetailsViewModel =
         viewModel(factory = RecipeDetailsViewModel.Factory)
 
+    val recipeEntryViewModel: RecipeEntryViewModel =
+        viewModel(factory = RecipeEntryViewModel.Factory)
+
     NavHost(
         navController = navController,
         startDestination = HomeDestination.route,
@@ -28,6 +34,7 @@ fun RecipeNavHost(
     ) {
         composable(route = HomeDestination.route) {
             HomeScreen(
+                navigateToRecipeEntry = { navController.navigate(RecipeEntryDestination.route) },
                 navigateToRecipeDetails = {
                     recipeDetailsViewModel.updateRecipe(it)
                     navController.navigate(DetailsDestination.route)
@@ -38,6 +45,13 @@ fun RecipeNavHost(
         composable(route = DetailsDestination.route) {
             RecipeDetailsScreen(
                 recipeDetailsViewModel = recipeDetailsViewModel,
+                navigateUp = { navController.popBackStack() })
+        }
+
+        composable(route = RecipeEntryDestination.route) {
+            RecipeEntryScreen(
+                recipeEntryViewModel = recipeEntryViewModel,
+                onSaveClick = {/* TODO */ },
                 navigateUp = { navController.popBackStack() })
         }
     }

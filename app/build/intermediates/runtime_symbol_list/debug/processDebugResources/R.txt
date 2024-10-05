@@ -280,6 +280,13 @@ int string navigation_menu 0x7f0a0049
 int string not_selected 0x7f0a004a
 int string range_end 0x7f0a004b
 int string range_start 0x7f0a004c
+int string recipe_entry 0x7f0a0057
+int string recipe_ingredients_entry 0x7f0a0059
+int string recipe_instructions_entry 0x7f0a005a
+int string recipe_name_entry 0x7f0a0058
+int string recipe_nutritional_entry 0x7f0a005c
+int string required_fields 0x7f0a005d
+int string save_action 0x7f0a005e
 int string selected 0x7f0a004d
 int string state_empty 0x7f0a004e
 int string state_off 0x7f0a004f
