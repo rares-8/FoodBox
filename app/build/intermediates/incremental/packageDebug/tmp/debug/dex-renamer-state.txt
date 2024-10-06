@@ -1,4 +1,4 @@
-#Sun Oct 06 14:28:11 EEST 2024
+#Sun Oct 06 15:15:40 EEST 2024
 base.0=C\:\\Users\\apost\\AndroidStudioProjects\\FoodBox\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\apost\\AndroidStudioProjects\\FoodBox\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\apost\\AndroidStudioProjects\\FoodBox\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\10\\classes.dex

@@ -2,6 +2,7 @@ package com.example.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
@@ -30,6 +31,8 @@ fun RecipeNavHost(
 
     val homeViewModel: HomeViewModel =
         viewModel(factory = HomeViewModel.Factory)
+
+    val focusManager = LocalFocusManager.current
 
     NavHost(
         navController = navController,
@@ -60,6 +63,7 @@ fun RecipeNavHost(
             RecipeEntryScreen(
                 recipeEntryViewModel = recipeEntryViewModel,
                 navigateUp = {
+                    focusManager.clearFocus()
                     navController.popBackStack()
                 })
         }

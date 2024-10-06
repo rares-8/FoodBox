@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 
 
 /**
- * ViewModel to retrieve all recipes in the database
+ * ViewModel to retrieve and delete recipes in the database
  */
 class HomeViewModel(private val recipesRepository: RecipesRepository): ViewModel() {
 
@@ -31,6 +31,11 @@ class HomeViewModel(private val recipesRepository: RecipesRepository): ViewModel
                 started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
                 initialValue = HomeUiState()
             )
+
+    suspend fun deleteRecipe(recipe: Recipe) {
+        recipesRepository.deleteRecipe(recipe)
+    }
+
 
     companion object {
         private const val TIMEOUT_MILLIS = 5_000L

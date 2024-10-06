@@ -1,5 +1,7 @@
 package com.example.foodbox.ui.recipe
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -18,7 +20,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.foodbox.R
@@ -40,6 +45,7 @@ fun RecipeEntryScreen(
     modifier: Modifier = Modifier,
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val focusManager = LocalFocusManager.current
 
     Scaffold(
         topBar = {
@@ -49,7 +55,11 @@ fun RecipeEntryScreen(
                 navigateUp = navigateUp
             )
         },
-        modifier = modifier
+        modifier = modifier.pointerInput(Unit) {
+            detectTapGestures {
+                focusManager.clearFocus()
+            }
+        }
     ) { innerPadding ->
         RecipeEntryBody(
             recipeUiState = recipeEntryViewModel.recipeUiState,
