@@ -4,16 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-
 import com.example.foodbox.ui.home.HomeDestination
 import com.example.foodbox.ui.home.HomeScreen
 import com.example.foodbox.ui.home.HomeViewModel
 import com.example.foodbox.ui.recipe.DetailsDestination
 import com.example.foodbox.ui.recipe.RecipeDetailsScreen
 import com.example.foodbox.ui.recipe.RecipeDetailsViewModel
+import com.example.foodbox.ui.recipe.RecipeEditDestination
+import com.example.foodbox.ui.recipe.RecipeEditScreen
+import com.example.foodbox.ui.recipe.RecipeEditViewModel
 import com.example.foodbox.ui.recipe.RecipeEntryDestination
 import com.example.foodbox.ui.recipe.RecipeEntryScreen
 import com.example.foodbox.ui.recipe.RecipeEntryViewModel
@@ -31,6 +33,9 @@ fun RecipeNavHost(
 
     val homeViewModel: HomeViewModel =
         viewModel(factory = HomeViewModel.Factory)
+
+    val editViewModel: RecipeEditViewModel =
+        viewModel(factory = RecipeEditViewModel.Factory)
 
     val focusManager = LocalFocusManager.current
 
@@ -55,8 +60,14 @@ fun RecipeNavHost(
 
         composable(route = DetailsDestination.route) {
             RecipeDetailsScreen(
+                onEditClicked = { recipe ->
+                    editViewModel.updateUiState(recipe)
+                    navController.navigate(RecipeEditDestination.route)
+                },
                 recipeDetailsViewModel = recipeDetailsViewModel,
-                navigateUp = { navController.popBackStack() })
+                navigateUp = {
+                    navController.popBackStack()
+                })
         }
 
         composable(route = RecipeEntryDestination.route) {
@@ -66,6 +77,17 @@ fun RecipeNavHost(
                     focusManager.clearFocus()
                     navController.popBackStack()
                 })
+        }
+
+        composable(route = RecipeEditDestination.route) {
+            RecipeEditScreen(
+                navigateUp = {
+                    recipeDetailsViewModel.updateRecipe(editViewModel.uiState.recipe)
+                    focusManager.clearFocus()
+                    navController.popBackStack()
+                },
+                recipeEditViewModel = editViewModel,
+            )
         }
     }
 

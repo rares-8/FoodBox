@@ -61,11 +61,13 @@ object DetailsDestination : NavigationDestination {
 @Composable
 fun RecipeDetailsScreen(
     recipeDetailsViewModel: RecipeDetailsViewModel,
+    onEditClicked: (Recipe) -> Unit,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
     val scrollState = rememberScrollState()
+    val uiState by recipeDetailsViewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
@@ -78,7 +80,7 @@ fun RecipeDetailsScreen(
         floatingActionButton = {
             AnimatedVisibility(visible = scrollState.value == 0) {
                 FloatingActionButton(
-                    onClick = { /*TODO NAVIGATE TO EDIT SCREEN*/ },
+                    onClick = { onEditClicked(uiState) },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier.padding(
                         end = WindowInsets.safeDrawing.asPaddingValues().calculateEndPadding(
@@ -93,8 +95,6 @@ fun RecipeDetailsScreen(
         },
         modifier = modifier
     ) { innerPadding ->
-
-        val uiState by recipeDetailsViewModel.uiState.collectAsState()
 
         RecipeDetailsBody(
             recipe = uiState,

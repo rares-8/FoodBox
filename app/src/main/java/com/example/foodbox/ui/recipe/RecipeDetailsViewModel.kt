@@ -16,7 +16,7 @@ class RecipeDetailsViewModel(
     private val recipesRepository: RecipesRepository,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(fakeRecipe)
+    private val _uiState = MutableStateFlow(Recipe())
 
     val uiState: StateFlow<Recipe> = _uiState
 
@@ -44,6 +44,3 @@ class RecipeDetailsViewModel(
         }
     }
 }
-
-
-private val fakeRecipe: Recipe = Recipe(name = "", ingredients = "", instructions = "")

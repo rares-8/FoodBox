@@ -136,6 +136,7 @@
     <string name="delete_option">Delete</string>
     <string name="details_title">Details</string>
     <string name="dropdown_menu">"Dropdown menu"</string>
+    <string name="edit_title">Edit recipe</string>
     <string name="in_progress">In progress</string>
     <string name="indeterminate">Partially checked</string>
     <string name="m3c_bottom_sheet_collapse_description">Collapse bottom sheet</string>

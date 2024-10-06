@@ -9,6 +9,7 @@
     <string name="required_fields">* required fields\n</string>
     <string name="save_action">Save recipe</string>
     <string name="delete_option">Delete</string>
+    <string name="edit_title">Edit recipe</string>
     <array name="com_google_android_gms_fonts_certs">
         <item>@array/com_google_android_gms_fonts_certs_dev</item>
         <item>@array/com_google_android_gms_fonts_certs_prod</item>
