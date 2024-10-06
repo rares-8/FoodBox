@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -12,6 +13,8 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -25,6 +28,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
@@ -48,9 +53,11 @@ object HomeDestination : NavigationDestination {
 fun HomeScreen(
     navigateToRecipeDetails: (Recipe) -> Unit,
     navigateToRecipeEntry: () -> Unit,
+    homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier
 ) {
     val scrollState = rememberScrollState()
+    val homeUiState by homeViewModel.homeUiState.collectAsState()
 
     Scaffold(
         topBar = {
@@ -79,21 +86,39 @@ fun HomeScreen(
 
         // TODO: put a grid here
 
-        RecipeItem(
+        HomeBody(
+            recipeList = homeUiState.recipeList,
             navigateToRecipeDetails = navigateToRecipeDetails,
-            recipe = Recipe(
-                name = "Steak",
-                ingredients = "Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.Use Local Fonts Instead: Instead of relying on Google Play Services, you can download the Google Fonts locally and add them to your app. This way, the fonts are bundled directly within the app and don’t need to be fetched over the network.",
-                instructions = "cook it",
-                nutriValue = ""
-            ),
-            modifier = Modifier.padding(innerPadding)
+            paddingValues = innerPadding
         )
     }
 }
 
 @Composable
-private fun RecipeItem(
+fun HomeBody(
+    recipeList: List<Recipe>,
+    navigateToRecipeDetails: (Recipe) -> Unit,
+    modifier: Modifier = Modifier,
+    paddingValues: PaddingValues = PaddingValues(0.dp)
+) {
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = paddingValues
+    ) {
+        items(items = recipeList, key = { it.id }) { recipe ->
+            RecipeItem(
+                navigateToRecipeDetails = navigateToRecipeDetails,
+                recipe = recipe,
+                modifier = Modifier.padding(
+                    dimensionResource(id = R.dimen.padding_small)
+                )
+            )
+        }
+    }
+}
+
+@Composable
+fun RecipeItem(
     navigateToRecipeDetails: (Recipe) -> Unit,
     recipe: Recipe,
     modifier: Modifier = Modifier

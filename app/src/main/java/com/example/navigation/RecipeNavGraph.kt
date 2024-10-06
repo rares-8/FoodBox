@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 
 import com.example.foodbox.ui.home.HomeDestination
 import com.example.foodbox.ui.home.HomeScreen
+import com.example.foodbox.ui.home.HomeViewModel
 import com.example.foodbox.ui.recipe.DetailsDestination
 import com.example.foodbox.ui.recipe.RecipeDetailsScreen
 import com.example.foodbox.ui.recipe.RecipeDetailsViewModel
@@ -27,6 +28,9 @@ fun RecipeNavHost(
     val recipeEntryViewModel: RecipeEntryViewModel =
         viewModel(factory = RecipeEntryViewModel.Factory)
 
+    val homeViewModel: HomeViewModel =
+        viewModel(factory = HomeViewModel.Factory)
+
     NavHost(
         navController = navController,
         startDestination = HomeDestination.route,
@@ -34,7 +38,11 @@ fun RecipeNavHost(
     ) {
         composable(route = HomeDestination.route) {
             HomeScreen(
-                navigateToRecipeEntry = { navController.navigate(RecipeEntryDestination.route) },
+                navigateToRecipeEntry = {
+                    recipeEntryViewModel.clearUiState()
+                    navController.navigate(RecipeEntryDestination.route)
+                },
+                homeViewModel = homeViewModel,
                 navigateToRecipeDetails = {
                     recipeDetailsViewModel.updateRecipe(it)
                     navController.navigate(DetailsDestination.route)
@@ -51,7 +59,9 @@ fun RecipeNavHost(
         composable(route = RecipeEntryDestination.route) {
             RecipeEntryScreen(
                 recipeEntryViewModel = recipeEntryViewModel,
-                navigateUp = { navController.popBackStack() })
+                navigateUp = {
+                    navController.popBackStack()
+                })
         }
     }
 

@@ -144,7 +144,7 @@ public final class RecipeDao_Impl implements RecipeDao {
 
   @Override
   public Flow<List<Recipe>> getAllRecipes() {
-    final String _sql = "SELECT * FROM recipes ORDER BY name ASC";
+    final String _sql = "SELECT * FROM recipes ORDER BY id ASC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return CoroutinesRoom.createFlow(__db, false, new String[] {"recipes"}, new Callable<List<Recipe>>() {
       @Override

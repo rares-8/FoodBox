@@ -37,6 +37,10 @@ class RecipeEntryViewModel(private val recipesRepository: RecipesRepository) : V
         }
     }
 
+    fun clearUiState() {
+        recipeUiState = RecipeUiState()
+    }
+
     /**
      * Inserts [Recipe] in database
      */
