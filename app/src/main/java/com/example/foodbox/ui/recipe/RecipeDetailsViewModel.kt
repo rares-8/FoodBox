@@ -25,6 +25,7 @@ class RecipeDetailsViewModel(
             with(newRecipe) {
                 it.copy(
                     id = id,
+                    photoUri = photoUri,
                     name = name,
                     instructions = instructions,
                     ingredients = ingredients,

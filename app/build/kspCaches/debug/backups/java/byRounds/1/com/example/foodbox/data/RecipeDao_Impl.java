@@ -42,17 +42,18 @@ public final class RecipeDao_Impl implements RecipeDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR IGNORE INTO `recipes` (`id`,`name`,`ingredients`,`instructions`,`nutriValue`) VALUES (nullif(?, 0),?,?,?,?)";
+        return "INSERT OR IGNORE INTO `recipes` (`id`,`photoUri`,`name`,`ingredients`,`instructions`,`nutriValue`) VALUES (nullif(?, 0),?,?,?,?,?)";
       }
 
       @Override
       protected void bind(@NonNull final SupportSQLiteStatement statement,
           @NonNull final Recipe entity) {
         statement.bindLong(1, entity.getId());
-        statement.bindString(2, entity.getName());
-        statement.bindString(3, entity.getIngredients());
-        statement.bindString(4, entity.getInstructions());
-        statement.bindString(5, entity.getNutriValue());
+        statement.bindString(2, entity.getPhotoUri());
+        statement.bindString(3, entity.getName());
+        statement.bindString(4, entity.getIngredients());
+        statement.bindString(5, entity.getInstructions());
+        statement.bindString(6, entity.getNutriValue());
       }
     };
     this.__deletionAdapterOfRecipe = new EntityDeletionOrUpdateAdapter<Recipe>(__db) {
@@ -72,18 +73,19 @@ public final class RecipeDao_Impl implements RecipeDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `recipes` SET `id` = ?,`name` = ?,`ingredients` = ?,`instructions` = ?,`nutriValue` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `recipes` SET `id` = ?,`photoUri` = ?,`name` = ?,`ingredients` = ?,`instructions` = ?,`nutriValue` = ? WHERE `id` = ?";
       }
 
       @Override
       protected void bind(@NonNull final SupportSQLiteStatement statement,
           @NonNull final Recipe entity) {
         statement.bindLong(1, entity.getId());
-        statement.bindString(2, entity.getName());
-        statement.bindString(3, entity.getIngredients());
-        statement.bindString(4, entity.getInstructions());
-        statement.bindString(5, entity.getNutriValue());
-        statement.bindLong(6, entity.getId());
+        statement.bindString(2, entity.getPhotoUri());
+        statement.bindString(3, entity.getName());
+        statement.bindString(4, entity.getIngredients());
+        statement.bindString(5, entity.getInstructions());
+        statement.bindString(6, entity.getNutriValue());
+        statement.bindLong(7, entity.getId());
       }
     };
   }
@@ -153,6 +155,7 @@ public final class RecipeDao_Impl implements RecipeDao {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+          final int _cursorIndexOfPhotoUri = CursorUtil.getColumnIndexOrThrow(_cursor, "photoUri");
           final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
           final int _cursorIndexOfIngredients = CursorUtil.getColumnIndexOrThrow(_cursor, "ingredients");
           final int _cursorIndexOfInstructions = CursorUtil.getColumnIndexOrThrow(_cursor, "instructions");
@@ -162,6 +165,8 @@ public final class RecipeDao_Impl implements RecipeDao {
             final Recipe _item;
             final int _tmpId;
             _tmpId = _cursor.getInt(_cursorIndexOfId);
+            final String _tmpPhotoUri;
+            _tmpPhotoUri = _cursor.getString(_cursorIndexOfPhotoUri);
             final String _tmpName;
             _tmpName = _cursor.getString(_cursorIndexOfName);
             final String _tmpIngredients;
@@ -170,7 +175,7 @@ public final class RecipeDao_Impl implements RecipeDao {
             _tmpInstructions = _cursor.getString(_cursorIndexOfInstructions);
             final String _tmpNutriValue;
             _tmpNutriValue = _cursor.getString(_cursorIndexOfNutriValue);
-            _item = new Recipe(_tmpId,_tmpName,_tmpIngredients,_tmpInstructions,_tmpNutriValue);
+            _item = new Recipe(_tmpId,_tmpPhotoUri,_tmpName,_tmpIngredients,_tmpInstructions,_tmpNutriValue);
             _result.add(_item);
           }
           return _result;

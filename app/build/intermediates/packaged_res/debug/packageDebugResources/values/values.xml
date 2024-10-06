@@ -17,6 +17,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
+    <dimen name="image_preview_size">56dp</dimen>
     <dimen name="padding_extra_large">32dp</dimen>
     <dimen name="padding_large">20dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
@@ -26,6 +27,7 @@
     <string name="details_title">Details</string>
     <string name="edit_option">Edit</string>
     <string name="edit_title">Edit recipe</string>
+    <string name="pick_image">Pick image</string>
     <string name="recipe_entry">Add recipe</string>
     <string name="recipe_ingredients_entry">Ingredients*</string>
     <string name="recipe_instructions_entry">Instructions*</string>

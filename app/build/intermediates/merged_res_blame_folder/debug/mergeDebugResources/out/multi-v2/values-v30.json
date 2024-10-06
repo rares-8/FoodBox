@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.foodbox.app-mergeDebugResources-55:/values-v30/values-v30.xml",
+            "outputFile": "com.example.foodbox.app-mergeDebugResources-57:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\38ba12389dda3c48b2c3e2d72dcb6b2b\\transformed\\material3-release\\res\\values-v30\\values-v30.xml",
+                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\75aa9923d1411535c96123dea8b50c14\\transformed\\material3-release\\res\\values-v30\\values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

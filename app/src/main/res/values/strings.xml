@@ -11,6 +11,7 @@
     <string name="delete_option">Delete</string>
     <string name="edit_title">Edit recipe</string>
     <string name="edit_option">Edit</string>
+    <string name="pick_image">Pick image</string>
     <array name="com_google_android_gms_fonts_certs">
         <item>@array/com_google_android_gms_fonts_certs_dev</item>
         <item>@array/com_google_android_gms_fonts_certs_prod</item>

@@ -10,6 +10,7 @@ color purple_700
 color teal_200
 color teal_700
 color white
+dimen image_preview_size
 dimen padding_extra_large
 dimen padding_large
 dimen padding_medium
@@ -23,6 +24,7 @@ string delete_option
 string details_title
 string edit_option
 string edit_title
+string pick_image
 string recipe_entry
 string recipe_ingredients_entry
 string recipe_instructions_entry
