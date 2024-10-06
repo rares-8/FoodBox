@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import com.example.foodbox.R
 import com.example.foodbox.ui.TopRecipeAppBar
-import com.example.navigation.NavigationDestination
+import com.example.foodbox.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 
 object RecipeEditDestination : NavigationDestination {

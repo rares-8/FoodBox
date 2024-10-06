@@ -17,6 +17,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
+    <dimen name="image_height">256dp</dimen>
     <dimen name="image_preview_size">56dp</dimen>
     <dimen name="padding_extra_large">32dp</dimen>
     <dimen name="padding_large">20dp</dimen>

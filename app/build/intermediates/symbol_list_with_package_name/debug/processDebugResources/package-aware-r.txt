@@ -63,6 +63,7 @@ dimen compat_button_padding_vertical_material
 dimen compat_control_corner_material
 dimen compat_notification_large_icon_max_height
 dimen compat_notification_large_icon_max_width
+dimen image_height
 dimen image_preview_size
 dimen notification_action_icon_size
 dimen notification_action_text_size
@@ -105,6 +106,8 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable placeholder
+drawable placeholder_preview
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1

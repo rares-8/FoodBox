@@ -1,20 +1,26 @@
 package com.example.foodbox.ui.home
 
+import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.border
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -41,17 +47,21 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.foodbox.R
 import com.example.foodbox.data.Recipe
 import com.example.foodbox.ui.TopRecipeAppBar
 import com.example.foodbox.ui.theme.FoodBoxTheme
-import com.example.navigation.NavigationDestination
+import com.example.foodbox.navigation.NavigationDestination
+import com.example.foodbox.ui.theme.scrimDark
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.reflect.KSuspendFunction1
@@ -70,9 +80,9 @@ fun HomeScreen(
     homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier
 ) {
-    val scrollState = rememberScrollState()
     val homeUiState by homeViewModel.homeUiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
+    val scrollState = rememberLazyListState()
 
     Scaffold(
         topBar = {
@@ -82,7 +92,7 @@ fun HomeScreen(
                 navigateUp = { })
         },
         floatingActionButton = {
-            AnimatedVisibility(visible = scrollState.value == 0) {
+            AnimatedVisibility(visible = !scrollState.canScrollBackward) {
                 FloatingActionButton(
                     onClick = navigateToRecipeEntry,
                     shape = MaterialTheme.shapes.medium,
@@ -99,12 +109,11 @@ fun HomeScreen(
         modifier = modifier
     ) { innerPadding ->
 
-        // TODO: put a grid here
-
         HomeBody(
             onEdit = onEdit,
             onDelete = homeViewModel::deleteRecipe,
             coroutineScope = coroutineScope,
+            scrollState = scrollState,
             recipeList = homeUiState.recipeList,
             navigateToRecipeDetails = navigateToRecipeDetails,
             paddingValues = innerPadding
@@ -117,6 +126,7 @@ fun HomeBody(
     onDelete: KSuspendFunction1<Recipe, Unit>,
     onEdit: (Recipe) -> Unit,
     coroutineScope: CoroutineScope,
+    scrollState: LazyListState,
     recipeList: List<Recipe>,
     navigateToRecipeDetails: (Recipe) -> Unit,
     modifier: Modifier = Modifier,
@@ -124,6 +134,7 @@ fun HomeBody(
 ) {
     LazyColumn(
         modifier = modifier,
+        state = scrollState,
         contentPadding = paddingValues
     ) {
         items(items = recipeList, key = { it.id }) { recipe ->
@@ -200,16 +211,42 @@ fun RecipeItem(
         modifier = modifier.clickable { navigateToRecipeDetails(recipe) },
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(dimensionResource(id = R.dimen.padding_medium)),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(text = recipe.name, style = MaterialTheme.typography.titleLarge)
+        Column(
 
-            DropDownOptions(onDelete = onDelete, onEdit = onEdit)
+        ) {
+            AsyncImage(
+                model = Uri.parse(recipe.photoUri),
+                contentDescription = "Recipe Image",
+                modifier = Modifier
+                    .height(
+                        dimensionResource(id = R.dimen.image_height)
+                    )
+                    .fillMaxWidth(0.7f)
+                    .align(Alignment.CenterHorizontally)
+                    .padding(top = dimensionResource(id = R.dimen.padding_medium)),
+                contentScale = ContentScale.Crop,
+                error = painterResource(id = R.drawable.placeholder_preview)
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(id = R.dimen.padding_medium)),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = recipe.name,
+                    style = MaterialTheme.typography.titleLarge,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = dimensionResource(id = R.dimen.padding_small))
+                )
+
+                DropDownOptions(onDelete = onDelete, onEdit = onEdit)
+            }
         }
     }
 }

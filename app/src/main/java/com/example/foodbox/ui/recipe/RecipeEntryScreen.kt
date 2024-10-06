@@ -1,5 +1,7 @@
 package com.example.foodbox.ui.recipe
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -32,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
@@ -40,7 +43,7 @@ import coil.compose.AsyncImage
 import com.example.foodbox.R
 import com.example.foodbox.data.Recipe
 import com.example.foodbox.ui.TopRecipeAppBar
-import com.example.navigation.NavigationDestination
+import com.example.foodbox.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 
 object RecipeEntryDestination : NavigationDestination {
@@ -130,19 +133,25 @@ fun RecipeForm(
     enabled: Boolean = true
 ) {
 
+    val context: Context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
     var selectedImageUri by remember {
         mutableStateOf<Uri?>(null)
     }
 
-    val singleImagePickerLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri ->
-            selectedImageUri = uri
-            if (uri != null) {
+    val singleImagePickerLauncher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) {
+            it?.let { uri ->
+                context.contentResolver.takePersistableUriPermission(
+                    uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+                selectedImageUri = uri
                 onValueChange(recipe.copy(photoUri = uri.toString()))
             }
+
         }
-    )
 
     Column(
         modifier = modifier,

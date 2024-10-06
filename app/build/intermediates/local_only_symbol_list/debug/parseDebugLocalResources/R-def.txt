@@ -10,6 +10,7 @@ color purple_700
 color teal_200
 color teal_700
 color white
+dimen image_height
 dimen image_preview_size
 dimen padding_extra_large
 dimen padding_large
@@ -17,6 +18,8 @@ dimen padding_medium
 dimen padding_small
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable placeholder
+drawable placeholder_preview
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

@@ -62,6 +62,7 @@ int dimen compat_button_padding_vertical_material 0x7f040003
 int dimen compat_control_corner_material 0x7f040004
 int dimen compat_notification_large_icon_max_height 0x7f040005
 int dimen compat_notification_large_icon_max_width 0x7f040006
+int dimen image_height 0x7f04001a
 int dimen image_preview_size 0x7f04001b
 int dimen notification_action_icon_size 0x7f040007
 int dimen notification_action_text_size 0x7f040008
@@ -104,6 +105,8 @@ int drawable notification_template_icon_bg 0x7f050013
 int drawable notification_template_icon_low_bg 0x7f050014
 int drawable notification_tile_bg 0x7f050015
 int drawable notify_panel_notification_icon_bg 0x7f050016
+int drawable placeholder 0x7f050017
+int drawable placeholder_preview 0x7f050018
 int id accessibility_action_clickable_span 0x7f060000
 int id accessibility_custom_action_0 0x7f060001
 int id accessibility_custom_action_1 0x7f060002
