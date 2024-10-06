@@ -1,6 +1,14 @@
 package com.example.foodbox.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+/**
+ * Entity data class that represent a row in the database
+ */
+@Entity(tableName = "recipes")
 data class Recipe(
+    @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String = "",
     val ingredients: String = "",

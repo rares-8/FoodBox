@@ -51,7 +51,6 @@ fun RecipeNavHost(
         composable(route = RecipeEntryDestination.route) {
             RecipeEntryScreen(
                 recipeEntryViewModel = recipeEntryViewModel,
-                onSaveClick = {/* TODO */ },
                 navigateUp = { navController.popBackStack() })
         }
     }

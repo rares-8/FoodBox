@@ -16,6 +16,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.dimensionResource
@@ -24,6 +25,7 @@ import com.example.foodbox.R
 import com.example.foodbox.data.Recipe
 import com.example.foodbox.ui.TopRecipeAppBar
 import com.example.navigation.NavigationDestination
+import kotlinx.coroutines.launch
 
 object RecipeEntryDestination : NavigationDestination {
     override val route = "recipe_entry"
@@ -33,11 +35,12 @@ object RecipeEntryDestination : NavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RecipeEntryScreen(
-    onSaveClick: () -> Unit,
     navigateUp: () -> Unit,
     recipeEntryViewModel: RecipeEntryViewModel,
     modifier: Modifier = Modifier,
 ) {
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             TopRecipeAppBar(
@@ -51,7 +54,12 @@ fun RecipeEntryScreen(
         RecipeEntryBody(
             recipeUiState = recipeEntryViewModel.recipeUiState,
             onValueChange = recipeEntryViewModel::updateUiState,
-            onSaveClick = onSaveClick,
+            onSaveClick = {
+                coroutineScope.launch {
+                    recipeEntryViewModel.saveRecipe()
+                    navigateUp()
+                }
+            },
             modifier = Modifier
                 .padding(
                     start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),

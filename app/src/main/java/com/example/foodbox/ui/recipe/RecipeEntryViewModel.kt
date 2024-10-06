@@ -14,6 +14,10 @@ import com.example.foodbox.data.Recipe
 import com.example.foodbox.data.RecipesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 
+
+/**
+ * ViewModel to insert recipes in the database
+ */
 class RecipeEntryViewModel(private val recipesRepository: RecipesRepository) : ViewModel() {
 
     var recipeUiState by mutableStateOf(RecipeUiState())
@@ -30,6 +34,15 @@ class RecipeEntryViewModel(private val recipesRepository: RecipesRepository) : V
     private fun validateRecipe(recipe: Recipe): Boolean {
         with(recipe) {
             return name.isNotBlank() && ingredients.isNotBlank() && instructions.isNotBlank()
+        }
+    }
+
+    /**
+     * Inserts [Recipe] in database
+     */
+    suspend fun saveRecipe() {
+        if (validateRecipe(recipeUiState.recipe)) {
+            recipesRepository.insertRecipe(recipeUiState.recipe)
         }
     }
 

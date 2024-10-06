@@ -11,6 +11,6 @@ interface AppContainer {
 
 class AppDataContainer(private val context: Context): AppContainer {
     override val recipesRepository: RecipesRepository by lazy {
-        OfflineRecipesRepository()
+        OfflineRecipesRepository(RecipeDatabase.getDatabase(context).recipeDao())
     }
 }
