@@ -21,6 +21,7 @@ mipmap ic_launcher_round
 string app_name
 string delete_option
 string details_title
+string edit_option
 string edit_title
 string recipe_entry
 string recipe_ingredients_entry

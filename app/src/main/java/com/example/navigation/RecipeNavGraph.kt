@@ -46,6 +46,9 @@ fun RecipeNavHost(
     ) {
         composable(route = HomeDestination.route) {
             HomeScreen(
+                onEdit = { recipe ->
+                    editViewModel.updateUiState(recipe)
+                    navController.navigate(RecipeEditDestination.route) },
                 navigateToRecipeEntry = {
                     recipeEntryViewModel.clearUiState()
                     navController.navigate(RecipeEntryDestination.route)

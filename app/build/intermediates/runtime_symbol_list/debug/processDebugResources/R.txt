@@ -220,6 +220,7 @@ int string default_popup_window_title 0x7f0a000c
 int string delete_option 0x7f0a005f
 int string details_title 0x7f0a000d
 int string dropdown_menu 0x7f0a000e
+int string edit_option 0x7f0a0061
 int string edit_title 0x7f0a0060
 int string in_progress 0x7f0a000f
 int string indeterminate 0x7f0a0010

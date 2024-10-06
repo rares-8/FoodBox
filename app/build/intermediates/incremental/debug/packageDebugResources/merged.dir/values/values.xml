@@ -24,6 +24,7 @@
     <string name="app_name">Food Box</string>
     <string name="delete_option">Delete</string>
     <string name="details_title">Details</string>
+    <string name="edit_option">Edit</string>
     <string name="edit_title">Edit recipe</string>
     <string name="recipe_entry">Add recipe</string>
     <string name="recipe_ingredients_entry">Ingredients*</string>

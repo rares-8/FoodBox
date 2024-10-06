@@ -221,6 +221,7 @@ string default_popup_window_title
 string delete_option
 string details_title
 string dropdown_menu
+string edit_option
 string edit_title
 string in_progress
 string indeterminate

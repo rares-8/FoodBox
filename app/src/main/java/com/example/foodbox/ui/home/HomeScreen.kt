@@ -19,6 +19,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -63,6 +64,7 @@ object HomeDestination : NavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    onEdit: (Recipe) -> Unit,
     navigateToRecipeDetails: (Recipe) -> Unit,
     navigateToRecipeEntry: () -> Unit,
     homeViewModel: HomeViewModel,
@@ -100,6 +102,7 @@ fun HomeScreen(
         // TODO: put a grid here
 
         HomeBody(
+            onEdit = onEdit,
             onDelete = homeViewModel::deleteRecipe,
             coroutineScope = coroutineScope,
             recipeList = homeUiState.recipeList,
@@ -112,6 +115,7 @@ fun HomeScreen(
 @Composable
 fun HomeBody(
     onDelete: KSuspendFunction1<Recipe, Unit>,
+    onEdit: (Recipe) -> Unit,
     coroutineScope: CoroutineScope,
     recipeList: List<Recipe>,
     navigateToRecipeDetails: (Recipe) -> Unit,
@@ -124,6 +128,7 @@ fun HomeBody(
     ) {
         items(items = recipeList, key = { it.id }) { recipe ->
             RecipeItem(
+                onEdit = { onEdit(recipe) },
                 navigateToRecipeDetails = navigateToRecipeDetails,
                 onDelete = {
                     coroutineScope.launch {
@@ -142,6 +147,7 @@ fun HomeBody(
 @Composable
 fun DropDownOptions(
     onDelete: () -> Unit,
+    onEdit: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -164,6 +170,18 @@ fun DropDownOptions(
                         )
                     )
                 })
+
+            DropdownMenuItem(
+                text = { Text(stringResource(id = R.string.edit_option)) },
+                onClick = onEdit,
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Edit, contentDescription = stringResource(
+                            id = R.string.edit_option
+                        )
+                    )
+                }
+            )
         }
     }
 
@@ -173,6 +191,7 @@ fun DropDownOptions(
 @Composable
 fun RecipeItem(
     onDelete: () -> (Unit),
+    onEdit: () -> Unit,
     navigateToRecipeDetails: (Recipe) -> Unit,
     recipe: Recipe,
     modifier: Modifier = Modifier
@@ -190,7 +209,7 @@ fun RecipeItem(
         ) {
             Text(text = recipe.name, style = MaterialTheme.typography.titleLarge)
 
-            DropDownOptions(onDelete = onDelete)
+            DropDownOptions(onDelete = onDelete, onEdit = onEdit)
         }
     }
 }
@@ -201,6 +220,7 @@ fun RecipeItemPreview() {
     FoodBoxTheme {
         RecipeItem(
             onDelete = {},
+            onEdit = {},
             navigateToRecipeDetails = {},
             recipe = Recipe(
                 name = "Steak",
