@@ -31,7 +31,6 @@
         <activity
             android:name="com.example.foodbox.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.FoodBox" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,6 +39,21 @@
             </intent-filter>
         </activity>
 
+        <!-- Trigger Google Play services to install the backported photo picker module. -->
+        <!-- Prompt Google Play services to install the backported photo picker module -->
+        <!-- Trigger Google Play services to install the backported photo picker module. -->
+        <service
+            android:name="com.google.android.gms.metadata.ModuleDependencies"
+            android:enabled="false"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+            </intent-filter>
+
+            <meta-data
+                android:name="photopicker_activity:0:required"
+                android:value="" />
+        </service>
         <service
             android:name="androidx.room.MultiInstanceInvalidationService"
             android:directBootAware="true"

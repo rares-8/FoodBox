@@ -3,6 +3,7 @@ package com.example.foodbox.ui.recipe
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -42,8 +43,8 @@ import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import com.example.foodbox.R
 import com.example.foodbox.data.Recipe
-import com.example.foodbox.ui.TopRecipeAppBar
 import com.example.foodbox.navigation.NavigationDestination
+import com.example.foodbox.ui.TopRecipeAppBar
 import kotlinx.coroutines.launch
 
 object RecipeEntryDestination : NavigationDestination {
@@ -140,53 +141,52 @@ fun RecipeForm(
         mutableStateOf<Uri?>(null)
     }
 
-    val singleImagePickerLauncher =
-        rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) {
-            it?.let { uri ->
-                context.contentResolver.takePersistableUriPermission(
-                    uri,
-                    Intent.FLAG_GRANT_READ_URI_PERMISSION
-                )
-                selectedImageUri = uri
-                onValueChange(recipe.copy(photoUri = uri.toString()))
-            }
-
-        }
+    val pickMedia =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.PickVisualMedia(),
+            onResult = {
+                selectedImageUri = it
+                onValueChange(recipe.copy(photoUri = it.toString()))
+                val flag = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                selectedImageUri?.let { uri ->
+                    context.contentResolver.takePersistableUriPermission(uri, flag)
+                }
+            })
 
     Column(
-        modifier = modifier,
+        modifier = modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(dimensionResource(id = R.dimen.image_preview_size))
-        ) {
-            Button(
-                onClick = {
-                    singleImagePickerLauncher.launch(
-                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                    )
-                },
-                modifier = Modifier.padding(end = dimensionResource(id = R.dimen.padding_medium))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(dimensionResource(id = R.dimen.image_preview_size))
             ) {
-                Text(text = stringResource(id = R.string.pick_image))
-            }
 
-            if (selectedImageUri != null || recipe.photoUri.isNotBlank()) {
-                AsyncImage(
-                    model = selectedImageUri ?: Uri.parse(recipe.photoUri),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .width(dimensionResource(id = R.dimen.image_preview_size))
-                        .padding(
-                            end = dimensionResource(
-                                id = R.dimen.padding_small
+                Button(
+                    onClick = {
+                        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                    },
+                    modifier = Modifier.padding(end = dimensionResource(id = R.dimen.padding_medium))
+                ) {
+                    Text(text = stringResource(id = R.string.pick_image))
+                }
+
+                if (selectedImageUri != null || recipe.photoUri.isNotBlank()) {
+                    AsyncImage(
+                        model = selectedImageUri ?: Uri.parse(recipe.photoUri),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .width(dimensionResource(id = R.dimen.image_preview_size))
+                            .padding(
+                                end = dimensionResource(
+                                    id = R.dimen.padding_small
+                                )
                             )
-                        )
-                )
+                    )
+                }
             }
         }
 

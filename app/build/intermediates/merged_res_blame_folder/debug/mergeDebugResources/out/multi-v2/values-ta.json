@@ -4,24 +4,7 @@
             "outputFile": "com.example.foodbox.app-mergeDebugResources-57:/values-ta/values-ta.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\4fc1968f9de7d992306d81e8462a5abe\\transformed\\foundation-release\\res\\values-ta\\values-ta.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,148",
-                        "endColumns": "92,97",
-                        "endOffsets": "143,241"
-                    },
-                    "to": {
-                        "startLines": "85,86",
-                        "startColumns": "4,4",
-                        "startOffsets": "9132,9225",
-                        "endColumns": "92,97",
-                        "endOffsets": "9220,9318"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\75aa9923d1411535c96123dea8b50c14\\transformed\\material3-release\\res\\values-ta\\values-ta.xml",
+                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\44dc0ca23b464494ee9791e8dd9ec254\\transformed\\material3-release\\res\\values-ta\\values-ta.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\27598bdaad0a998a9f3d1fdab2da6205\\transformed\\ui-release\\res\\values-ta\\values-ta.xml",
+                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\b5e9c73d5e52fa683d7f2aa0f6100c14\\transformed\\foundation-release\\res\\values-ta\\values-ta.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,148",
+                        "endColumns": "92,97",
+                        "endOffsets": "143,241"
+                    },
+                    "to": {
+                        "startLines": "85,86",
+                        "startColumns": "4,4",
+                        "startOffsets": "9132,9225",
+                        "endColumns": "92,97",
+                        "endOffsets": "9220,9318"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\44f3a34794c0c51933730e5eb0866690\\transformed\\ui-release\\res\\values-ta\\values-ta.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\117d0ff627128390eba198c7ed3f8b9e\\transformed\\core-1.13.1\\res\\values-ta\\values-ta.xml",
+                    "source": "C:\\Users\\apost\\.gradle\\caches\\transforms-4\\e2213384d9e1a0a9787a44d42774a68e\\transformed\\core-1.13.1\\res\\values-ta\\values-ta.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
