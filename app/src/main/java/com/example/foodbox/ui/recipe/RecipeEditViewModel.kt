@@ -12,6 +12,9 @@ import com.example.foodbox.FoodBoxApplication
 import com.example.foodbox.data.Recipe
 import com.example.foodbox.data.RecipesRepository
 
+/**
+ * View Model to update entries in the database
+ */
 class RecipeEditViewModel(
     private val recipesRepository: RecipesRepository
 ) : ViewModel() {
