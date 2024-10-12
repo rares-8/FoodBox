@@ -1,6 +1,7 @@
 package com.example.foodbox.ui.recipe
 
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ScrollState
@@ -97,8 +98,6 @@ fun RecipeDetailsScreen(
         modifier = modifier
     ) { innerPadding ->
 
-        HorizontalDivider(thickness = 2.dp, color = MaterialTheme.colorScheme.onPrimary)
-
         RecipeDetailsBody(
             recipe = uiState,
             scrollState = scrollState,
@@ -143,7 +142,7 @@ fun RecipeDetailsBody(
 
         Log.d("RecipeDetails", "Photo URI: ${recipe.photoUri}")
 
-        if (recipe.photoUri.isNotBlank()) {
+        if (recipe.photoUri.isNotBlank() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             AsyncImage(
                 model = Uri.parse(recipe.photoUri),
                 contentDescription = "Recipe Image",

@@ -1,6 +1,7 @@
 package com.example.foodbox.ui.home
 
 import android.net.Uri
+import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
@@ -214,19 +215,21 @@ fun RecipeItem(
         Column(
 
         ) {
-            AsyncImage(
-                model = Uri.parse(recipe.photoUri),
-                contentDescription = "Recipe Image",
-                modifier = Modifier
-                    .height(
-                        dimensionResource(id = R.dimen.image_height)
-                    )
-                    .fillMaxWidth(0.7f)
-                    .align(Alignment.CenterHorizontally)
-                    .padding(top = dimensionResource(id = R.dimen.padding_medium)),
-                contentScale = ContentScale.Crop,
-                error = painterResource(id = R.drawable.placeholder_preview)
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                AsyncImage(
+                    model = Uri.parse(recipe.photoUri),
+                    contentDescription = "Recipe Image",
+                    modifier = Modifier
+                        .height(
+                            dimensionResource(id = R.dimen.image_height)
+                        )
+                        .fillMaxWidth(0.7f)
+                        .align(Alignment.CenterHorizontally)
+                        .padding(top = dimensionResource(id = R.dimen.padding_medium)),
+                    contentScale = ContentScale.Crop,
+                    error = painterResource(id = R.drawable.placeholder_preview)
+                )
+            }
 
             Row(
                 modifier = Modifier
